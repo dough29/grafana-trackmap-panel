@@ -344,17 +344,17 @@ System.register(["./leaflet/leaflet.js", "moment", "app/core/app_events", "app/p
 
 
             this.coords.length = 0;
-            var lats = data[0].datapoints;
-            var lons = data[1].datapoints;
+            var datacoords = data[0].datapoints;
 
-            for (var i = 0; i < lats.length; i++) {
-              if (lats[i][0] == null || lons[i][0] == null || lats[i][1] !== lats[i][1]) {
+            for (var i = 0; i < datacoords.length; i++) {
+			  var datacoord = datacoords[i][0].split(',');
+              if (datacoord[0] == null || datacoord[1] == null || datacoords[i][1] !== datacoords[i][1]) {
                 continue;
               }
 
               this.coords.push({
-                position: L.latLng(lats[i][0], lons[i][0]),
-                timestamp: lats[i][1]
+                position: L.latLng(datacoord[0], datacoord[1]),
+                timestamp: datacoords[i][1]
               });
             }
 
